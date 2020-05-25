@@ -1,0 +1,45 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+.bg-theme {
+    background: #3490de;
+}
+
+body {
+    background: whitesmoke;
+}
+
+.h-game {
+    height: calc(100% - 2rem);
+}
+
+.h-half {
+    height: 50%;
+}
+
+.w-half {
+    width: 50%;
+}
+
+.my-15p {
+    margin: 15% 0;
+}
+
+.Toastify__toast {
+    text-align: center;
+}
+
+.Toastify__close-button {
+    display: none;
+}
+
+.Toastify__toast--error {
+    background-color: red !important;
+}
+
+.Toastify__toast--info {
+    background-color: #4361ee !important;
+}
