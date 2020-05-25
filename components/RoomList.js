@@ -13,7 +13,7 @@ export default function RoomList(){
     },[]);
 
     const fetchRooms = async () => {
-        const availableRooms = await axios.get('https://movie-fight-alpha.now.sh/roomlist');
+        const availableRooms = await axios.get('/roomlist');
         setRoomsList(availableRooms.data);
     }
 
