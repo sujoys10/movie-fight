@@ -7,7 +7,7 @@ const SocketInstance = ({ children }) => {
     const socketRef = useRef(null);
 
     useEffect(() => {
-        const socket = io();
+        const socket = io('https://movie-fight-alpha.now.sh/');
         socketRef.current = socket;
         console.log(socket)
     },[])

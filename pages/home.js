@@ -47,7 +47,7 @@ export default function Home({ onlineUsers }) {
 
 
 export async function getServerSideProps(){
-  const res = await fetch('http://localhost:3000/online');
+  const res = await fetch('https://movie-fight-alpha.now.sh/online');
   const onlineUsers = await res.json();
   return { props: { onlineUsers } }
 }
