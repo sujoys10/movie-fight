@@ -1,7 +1,0 @@
-{
-    "name": "movie-fight",
-    "alias": "movie-fight.sujoys10.now.sh",
-    "env": {
-      "NODE_ENV": "production"
-    }
-  }
