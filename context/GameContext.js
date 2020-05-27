@@ -10,17 +10,15 @@ const GameState =({ children }) => {
     const [ selectedMovies, setSelectedMovies ] = useState([]);
     
     const addSelectedMovies = (id) => {
-        //console.log({id})
         const movies = [...selectedMovies, id];
         setSelectedMovies(movies);
-       // console.log('s', {movies, selectedMovies});
         //emit selectedMovie List
         socket.emit('selectedMovies', selectedMovies);
     }
 
     const resetGame = () => {
         setPlayer(player => ({...player, score: 0, movie: '' }));
-        setOpponent(opponent => ({...opponent, score: 0, movie: '' }));
+        setOpponent({name: '', score: 0, movie: '' });
         setSelectedMovies([]);
     }
 

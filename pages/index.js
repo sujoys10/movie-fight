@@ -21,7 +21,7 @@ export default function Index(){
   }
   return(
     <Layout>
-      <div className="bg-blue-500 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+      <div className="bg-blue-600 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
              h-48 w-64 mx-auto flex flex-col items-center justify-center rounded shadow">
         <div className="m-2">
           <h1 className="font-semibold">Welcome to Movie Fight</h1>

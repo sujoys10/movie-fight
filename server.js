@@ -1,5 +1,6 @@
 const app = require('express')();
 const server = require('http').createServer(app);
+const { parse } = require('url');
 const io = require('socket.io')(server);
 const next = require('next');
 const dev = process.env.NODE_ENV !== 'production';
@@ -81,24 +82,26 @@ io.on('connection', socket => {
     socket.on('leaveRoom', () => {
         const user = users.getUser(socket.id);
         //check if the user is owner
-        const room = rooms.getRoom(user.room);
         
-        console.log(room, user.name)
-        if(room){
-            if(room.owner === user.name){
-                const rv = rooms.removeRoom(room.name);
-               // console.log('remove',{rv})
-                //emit updated roomlist
-                io.sockets.emit('roomList', rooms.getRoomList());
-                //emit admin left event
-                socket.broadcast.to(user.room).emit('ownerLeft');
-            }else{
-                rooms.removeMemberFromRoom(user.room, socket.id);
-                //emit user left event
-                socket.broadcast.to(user.room).emit('opponentLeft');
-            }
-            socket.leave(user.room);   
-        }  
+        //console.log(room, user.name)
+        if(user){
+            const room = rooms.getRoom(user.room);
+            if(room){
+                if(room.owner === user.name){
+                    const rv = rooms.removeRoom(room.name);
+                   // console.log('remove',{rv})
+                    //emit updated roomlist
+                    io.sockets.emit('roomList', rooms.getRoomList());
+                    //emit admin left event
+                    socket.broadcast.to(user.room).emit('ownerLeft');
+                }else{
+                    rooms.removeMemberFromRoom(user.room, socket.id);
+                    //emit user left event
+                    socket.broadcast.to(user.room).emit('opponentLeft');
+                }
+                socket.leave(user.room);   
+            }  
+        }
     })
 
     socket.on('disconnect', () => {
@@ -140,6 +143,11 @@ nextApp.prepare().then(() => {
         const roomlist = rooms.getRoomList();
         res.json(roomlist);
     })
+
+    app.get('/home', (req, res) => {
+        nextApp.render(req, res, '/home');
+    })
+
 
     app.get('*', (req, res) => {
         return handler(req, res)

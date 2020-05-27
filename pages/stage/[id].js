@@ -7,6 +7,7 @@ import { SocketContext } from "../../context/SocketContext";
 import { GameContext } from "../../context/GameContext";
 import ScoreCard from "../../components/ScoreCard";
 import Layout from "../../components/Layout";
+import ErrorBoundary from '../../components/ErrorBoundary';
 
 export default function Stage(){
     const Router = useRouter();
@@ -17,8 +18,7 @@ export default function Stage(){
 
 
     const handleRouteChange = (url) => {
-      console.log('routechange',url);
-      socket.emit('leaveRoom');
+      socket && socket.emit('leaveRoom');
     }
 
     const resetStage = () => {
@@ -31,18 +31,18 @@ export default function Stage(){
       Router.events.on('routeChangeStart', handleRouteChange);
 
       //listen to welcome message
-      socket.on('welcomeMsg', msg => {
+      socket && socket.on('welcomeMsg', msg => {
         console.log('welcome:' ,{msg})
       })
 
       //listen to new member joining
-      socket.on('newMember', name => {
+      socket && socket.on('newMember', name => {
         console.log('newMember: ' ,`${name} joined`)
         toast.info(`${name} joined`);
         addOpponentName(name);
       })
 
-      socket.on('opponentLeft', () => {
+      socket && socket.on('opponentLeft', () => {
         console.log('opponent left');
         toast.error(`${opponent.name} left`)
         setRound(1);
@@ -50,7 +50,7 @@ export default function Stage(){
         setOpen(false)
       })
 
-      socket.on('ownerLeft', () => {
+      socket && socket.on('ownerLeft', () => {
           console.log('owner left');
           toast.error(`${opponent.name} left.`);
           Router.push('/home');
@@ -80,28 +80,30 @@ export default function Stage(){
     }, [player.movie, opponent.movie])
 
     return(
-      <Layout>
-        <div className="relative h-game">
-          <div className="flex flex-col h-full">
-              <Opponent />
-              <Player />
+      <ErrorBoundary>
+        <Layout>
+          <div className="relative h-game">
+            <div className="flex flex-col h-full">
+                <Opponent />
+                <Player />
+            </div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black
+                  rounded-full h-12 w-12 
+            ">
+              <p className="text-white text-xl font-medium  text-center my-15p">{round}</p>
+            </div>
+            { open ? <ScoreCard closeModal={setOpen} resetRound={setRound} /> : null }
+            <ToastContainer
+              position="top-center"
+              autoClose={1000}
+              closeOnClick={false}
+              hideProgressBar
+              transition={Slide}
+              rtl={false}
+            />
           </div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black
-                rounded-full h-12 w-12 
-          ">
-            <p className="text-white text-xl font-medium  text-center my-15p">{round}</p>
-          </div>
-          { open ? <ScoreCard closeModal={setOpen} resetRound={setRound} /> : null }
-          <ToastContainer
-            position="top-center"
-            autoClose={1000}
-            closeOnClick={false}
-            hideProgressBar
-            transition={Slide}
-            rtl={false}
-          />
-        </div>
-      </Layout>
+        </Layout>
+      </ErrorBoundary>
     )
 }
 

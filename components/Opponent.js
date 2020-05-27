@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import MovieBox from './MovieBox';
 import { SocketContext } from '../context/SocketContext';
 import { GameContext } from '../context/GameContext';
+import ErrorBoundary from './ErrorBoundary';
 
 export default function Opponent(){
     const { socket } = useContext(SocketContext);
@@ -10,12 +11,12 @@ export default function Opponent(){
 
     useEffect(() => {
         //listen searching event
-        socket.on('searching', () => {
+        socket && socket.on('searching', () => {
             setSearching(true);
         })
 
         //listen to selectedMovieByOpponent
-        socket.on('selectedMovieByOpponent', movie => {
+        socket && socket.on('selectedMovieByOpponent', movie => {
             setSearching(false);
             addOpponentMovie(movie)
             addSelectedMovies(movie);
@@ -23,17 +24,20 @@ export default function Opponent(){
     })
 
     return(
-        <div className="h-half ">
-            <div className="mx-2 flex justify-between">
-                <p className="text-sm uppercase tracking-wider" >{opponent.name? opponent.name : 'waiting'}</p>
-                <p>score: {opponent.score}</p>
+        <ErrorBoundary>
+            <div className="h-half ">
+                <div className="mx-2 flex justify-between">
+                    <p className="text-sm uppercase tracking-wider" >{opponent.name? opponent.name : 'waiting'}</p>
+                    <p>score: {opponent.score}</p>
+                </div>
+                <div className="flex flex-col items-center my-1">
+                    { searching && (
+                        <p className="m-1 font-medium">Searching...</p>
+                    )}
+                    <MovieBox id={opponent.movie}/>
+                </div>
             </div>
-            <div className="flex flex-col items-center my-1">
-                { searching && (
-                    <p className="m-1 font-medium">Searching...</p>
-                )}
-                <MovieBox id={opponent.movie}/>
-            </div>
-        </div>
+        </ErrorBoundary>
+       
     )
 }

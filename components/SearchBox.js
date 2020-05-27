@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-//import useSWR from 'swr';
 import axios from 'axios';
 import MovieList from './MovieList';
 import { GameContext } from '../context/GameContext';
@@ -14,7 +13,6 @@ export default function SearchBox(){
 
     const handleInputChange = async (e) => {
         setSearchTerm(e.target.value);
-        //console.log('input: ',e.target.value);
         const response = await axios.get('http://www.omdbapi.com/', {
             params: {
                 apikey: '64337330',
@@ -28,7 +26,7 @@ export default function SearchBox(){
     }
 
     const handleFocus = () => {
-        socket.emit('searching');
+        socket && socket.emit('searching');
     }
 
     return(

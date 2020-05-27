@@ -17,11 +17,11 @@ export default function RoomForm(){
         e.preventDefault();
         const nickname = localStorage.getItem('nickname');
 
-        socket.emit('join', { name: nickname, room });
+        socket && socket.emit('join', { name: nickname, room });
         Router.push('/stage/[id]', `/stage/${room}`)
     }
     return(
-        <div className="bg-blue-500 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+        <div className="bg-blue-600 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
         h-32 w-64 flex items-center justify-center border border-gray-500 rounded">
             <form className="flex flex-col items-center" onSubmit={handleSubmit}>
                 <Input 

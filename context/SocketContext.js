@@ -9,7 +9,7 @@ const SocketInstance = ({ children }) => {
     useEffect(() => {
         const socket = io();
         socketRef.current = socket;
-        console.log(socket)
+       // console.log(socket)
     },[])
 
     return (
