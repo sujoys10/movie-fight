@@ -34,7 +34,7 @@ export default function Opponent(){
         <ErrorBoundary>
             <div className="h-half ">
                 <div className="mx-2 flex justify-between">
-                    <p className="text-sm uppercase tracking-wider" >{opponent.name? opponent.name : 'waiting'}</p>
+                    <p className="text-sm uppercase tracking-wider" >{opponent.name? opponent.name : 'waiting...'}</p>
                     <p>score: {opponent.score}</p>
                 </div>
                 <div className="flex flex-col items-center my-1">

@@ -14,7 +14,7 @@ export default function SearchBox(){
 
     const handleInputChange = async (e) => {
         setSearchTerm(e.target.value);
-        const response = await axios.get('http://www.omdbapi.com/', {
+        const response = await axios.get('https://www.omdbapi.com/', {
             params: {
                 apikey: '64337330',
                 s: e.target.value

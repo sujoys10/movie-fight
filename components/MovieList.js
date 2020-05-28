@@ -44,3 +44,4 @@ export default function MovieList({ searchResult, clearInput }){
         </div>
     )
 }
+

@@ -8,6 +8,7 @@ import { GameContext } from "../../context/GameContext";
 import ScoreCard from "../../components/ScoreCard";
 import Layout from "../../components/Layout";
 import ErrorBoundary from '../../components/ErrorBoundary';
+import Head from "next/head";
 
 export default function Stage(){
     const Router = useRouter();
@@ -90,6 +91,9 @@ export default function Stage(){
     return(
       <ErrorBoundary>
         <Layout>
+          <Head>
+            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+          </Head>
           <div className="relative h-game">
             <div className="flex flex-col h-full">
                 <Opponent />
