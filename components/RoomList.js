@@ -10,11 +10,10 @@ export default function RoomList(){
 
     useEffect(() => {
         fetchRooms();
-
     },[]);
 
     const fetchRooms = async () => {
-        const availableRooms = await axios.get('https://movie-cricket.herokuapp.com/roomlist');
+        const availableRooms = await axios.get('http://localhost:3000/roomlist');
         setRoomsList(availableRooms.data);
     }
 

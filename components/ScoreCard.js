@@ -11,7 +11,6 @@ export default function ScoreCard({closeModal, resetRound}){
     const { player, opponent, calculateScore ,resetGame } = useContext(GameContext);
     const { socket } = useContext(SocketContext);
     const [ rematch, setRematch ] = useState(false);
-    //const [ waiting, setWaiting ] = useState(false);
     const toastID = useRef('');
 
     const handlePlayAgain = () => {
@@ -37,8 +36,7 @@ export default function ScoreCard({closeModal, resetRound}){
 
     const handleRouteToHome = () => {
         //emit leave room
-        socket && socket.emit('leaveRoom');
-        Router.push('/home');
+        Router.replace('/home');
     }
 
     useEffect(() => {
@@ -63,8 +61,11 @@ export default function ScoreCard({closeModal, resetRound}){
         })
 
         return () => {
-            toastID.current &&  
-                toast.dismiss(toastID.current);
+            toastID.current &&  toast.dismiss(toastID.current);
+            if(socket){
+                socket.off('playAgain');
+                socket.off('startRematch');
+            }
         }
     }, [])
 

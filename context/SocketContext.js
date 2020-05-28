@@ -1,21 +1,20 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client'
 
 export const  SocketContext = React.createContext();
 
 const SocketInstance = ({ children }) => {
-    const socketRef = useRef(null);
+    const [socket, setSocket] = useState(null);
 
     useEffect(() => {
         const socket = io();
-        socketRef.current = socket;
-       // console.log(socket)
+        setSocket(socket);
     },[])
 
     return (
         <SocketContext.Provider
             value={{
-                socket: socketRef.current
+                socket,
             }}
         >
             {children}

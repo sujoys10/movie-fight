@@ -11,12 +11,12 @@ export default function Room({ room }){
 
     const handleJoinRoom = () => {
 
-        const nickname = localStorage.getItem('nickname');
-        socket.emit('join', { name: player.name, room: room.name })
+        socket && socket.emit('join', { name: player.name, room: room.name })
         addOpponentName(room.owner);
         Router.push('/stage/[id]', `/stage/${room.name}`);
 
     }
+
 
     return (
         <div className="bg-white flex justify-between m-2 px-2 py-1 shadow rounded">

@@ -12,12 +12,12 @@ export default function Home({ onlineUsers }) {
 
     useEffect(() => {
       socket && socket.on('user', (count) => {
-       setUsers(count)
+       setUsers(count);
       })
 
-       /* return () => {
-         socket.off('user')
-       }  */
+       return () => {
+        socket && socket.off('user')
+       }
     },[])
     return (
       <Layout>
@@ -26,7 +26,7 @@ export default function Home({ onlineUsers }) {
             <title>Movie Fight</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <p className="fixed top-1 right-2">Online : {users}</p>
+          <p className="fixed top-2 right-2">Online : {users}</p>
           <div className="py-1 my-2 flex w-full">
             <p 
               className="text-center w-half p-2" 
@@ -39,7 +39,7 @@ export default function Home({ onlineUsers }) {
               style={tab === 'rooms' ? {color: '#1c8fe7'} : null}
             >Rooms</p>
           </div>
-          { tab === 'home' ? <RoomForm /> : <RoomList /> }
+          { tab === 'home' ? <RoomForm /> : <RoomList socket={socket}/> }
         </div>
       </Layout>
     )
@@ -47,7 +47,7 @@ export default function Home({ onlineUsers }) {
 
 
 export async function getServerSideProps(){
-  const res = await fetch('https://movie-cricket.herokuapp.com/online');
+  const res = await fetch('http://localhost:3000/online');
   const onlineUsers = await res.json();
   return { props: { onlineUsers } }
 }

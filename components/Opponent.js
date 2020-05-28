@@ -21,6 +21,13 @@ export default function Opponent(){
             addOpponentMovie(movie)
             addSelectedMovies(movie);
         })
+
+        return () => {
+            if(socket){
+                socket.off('searching');
+                socket.off('selectedMovieByOpponent');
+            }
+        }
     })
 
     return(

@@ -91,13 +91,14 @@ io.on('connection', socket => {
                     const rv = rooms.removeRoom(room.name);
                    // console.log('remove',{rv})
                     //emit updated roomlist
+                    
                     io.sockets.emit('roomList', rooms.getRoomList());
                     //emit admin left event
-                    socket.broadcast.to(user.room).emit('ownerLeft');
+                    socket.broadcast.to(user.room).emit('ownerLeft', user.name);
                 }else{
                     rooms.removeMemberFromRoom(user.room, socket.id);
                     //emit user left event
-                    socket.broadcast.to(user.room).emit('opponentLeft');
+                    socket.broadcast.to(user.room).emit('opponentLeft', user.name);
                 }
                 socket.leave(user.room);   
             }  

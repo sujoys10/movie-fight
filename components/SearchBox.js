@@ -3,11 +3,12 @@ import axios from 'axios';
 import MovieList from './MovieList';
 import { GameContext } from '../context/GameContext';
 import { SocketContext } from '../context/SocketContext';
+import Opponent from './Opponent';
 
 export default function SearchBox(){    
     const [ searchTerm, setSearchTerm ] = useState('');
     const [ searchResult, setSearchResult ] = useState([]);
-    const { player } = useContext(GameContext);
+    const { player, opponent } = useContext(GameContext);
     const { socket } = useContext(SocketContext);
 
 
@@ -36,7 +37,7 @@ export default function SearchBox(){
                 name="search" 
                 type="text"
                 placeholder="Search Movie"
-                disabled={!!player.movie}
+                disabled={!opponent.name || !!player.movie}
                 value={searchTerm}
                 onChange={handleInputChange}
                 onFocus={handleFocus}

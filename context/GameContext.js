@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { SocketContext } from "./SocketContext";
 
 export const GameContext = React.createContext();
@@ -9,6 +9,12 @@ const GameState =({ children }) => {
     const [ opponent, setOpponent ] = useState({ name: '', score: 0, movie: '' })
     const [ selectedMovies, setSelectedMovies ] = useState([]);
     
+    useEffect(() => {
+        const nickname = localStorage.getItem('nickname');
+        nickname && 
+            setPlayer(player => ({...player, name: nickname}));
+    }, [])
+
     const addSelectedMovies = (id) => {
         const movies = [...selectedMovies, id];
         setSelectedMovies(movies);
@@ -33,7 +39,8 @@ const GameState =({ children }) => {
     }
 
     const addPlayerName = (name) => {
-        setPlayer(player => ({...player, name}))
+        setPlayer(player => ({...player, name}));
+        localStorage.setItem('nickname', name);
     }
     
     const addOpponentName = (name) => {

@@ -27,6 +27,11 @@ export default function Stage(){
       setOpen(false)
     }
 
+    const startNextRound = () => {
+      nextRound();
+      toast.info('Next round 🦄');
+    }
+
     useEffect(() => {
       Router.events.on('routeChangeStart', handleRouteChange);
 
@@ -42,39 +47,42 @@ export default function Stage(){
         addOpponentName(name);
       })
 
-      socket && socket.on('opponentLeft', () => {
+      socket && socket.on('opponentLeft', (opponent) => {
         console.log('opponent left');
-        toast.error(`${opponent.name} left`)
+        toast.error(`${opponent} left`)
         setRound(1);
         resetGame();
         setOpen(false)
       })
 
-      socket && socket.on('ownerLeft', () => {
+      socket && socket.on('ownerLeft', (owner) => {
           console.log('owner left');
-          toast.error(`${opponent.name} left.`);
-          Router.push('/home');
+          toast.error(`${owner} left.`);
+          Router.replace('/home');
       })
 
       return () => {
         Router.events.off('routeChangeStart', handleRouteChange)
         resetStage();
+        if(socket){
+          socket.off('opponentLeft');
+          socket.off('ownerLeft');
+          socket.off('newMember');
+          socket.off('welcomeMsg');
+        }
       }
     },[])
+
+    
 
     useEffect(() => {
       if(player.movie && opponent.movie){
         const currentRound = round - 1;
         setRound(currentRound);
         if(currentRound === 0){
-         // console.log('game over')
           setOpen(true)
-          //calculateScore();
         }else{
-          toast.info('Next round 🦄', { autoClose: 2000});
-         // console.log('gameStarted')
-          //runComparison();
-          setTimeout(nextRound, 3000);
+          setTimeout(startNextRound, 2500);
         }
       }
     }, [player.movie, opponent.movie])

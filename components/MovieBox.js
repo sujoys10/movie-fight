@@ -31,9 +31,9 @@ const MovieBox = React.memo(function({ id, player }){
     return(
         <Fragment>
             { movieDetails ? (
-                <div className="flex flex-col items-center mt-1">
+                <div className="flex flex-col items-center mt-4">
                     <div className="h-24 w-24 lg:h-32 lg:w-32 rounded">
-                        <img className="h-full w-full shadow rounded" src={movieDetails.Poster} alt={movieDetails.Title} />
+                        <img className="h-full w-full shadow rounded" src={movieDetails.Poster} alt={movieDetails.imdbRating} />
                     </div>
                     <p className="text-xs font-medium mt-px">IMDB: {movieDetails.imdbRating}</p>
                     <p className="text-sm lg:text-base">{movieDetails.Title}</p>
