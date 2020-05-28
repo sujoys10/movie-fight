@@ -39,7 +39,7 @@ export default function Home({ onlineUsers }) {
               style={tab === 'rooms' ? {color: '#1c8fe7'} : null}
             >Rooms</p>
           </div>
-          { tab === 'home' ? <RoomForm /> : <RoomList socket={socket}/> }
+          { tab === 'home' ? <RoomForm /> : <RoomList /> }
         </div>
       </Layout>
     )
@@ -47,7 +47,7 @@ export default function Home({ onlineUsers }) {
 
 
 export async function getServerSideProps(){
-  const res = await fetch('http://localhost:3000/online');
+  const res = await fetch('https://movie-cricket.herokuapp.com/online');
   const onlineUsers = await res.json();
   return { props: { onlineUsers } }
 }
