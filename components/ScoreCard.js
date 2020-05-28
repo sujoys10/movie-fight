@@ -74,7 +74,7 @@ export default function ScoreCard({closeModal, resetRound}){
             <div
             style={{top:0, left:0}}
             className="fixed bg-black bg-opacity-75 h-screen w-screen">
-                <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+                <div className="fixed bg-theme top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
                         bg-gray-100 h-48 w-64 rounded p-2 flex flex-col items-center
                 ">
                     <p className="font-medium uppercase tracking-wilder mb-1">Scorecard</p>

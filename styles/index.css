@@ -5,7 +5,7 @@
 @import "tailwindcss/utilities";
 
 .bg-theme {
-    background: #1c8fe7;
+    background-image: linear-gradient(to top, rgba(126, 213, 111, 0.8), rgba(40, 180, 131, 0.8));
 }
 
 body {
