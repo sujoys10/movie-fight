@@ -33,10 +33,11 @@ const GameState =({ children }) => {
         setOpponent(opponent => ({ ...opponent, movie: ''}));
     }
 
-    const nextRound = () => {
-        resetBoard();
-        //setRound(prev => prev-=1);
+    const startRematch = () => {
+        setPlayer(player => ({ ...player, score: 0, movie: ''}));
+        setOpponent(opponent => ({ ...opponent, score: 0, movie: ''}));
     }
+
 
     const addPlayerName = (name) => {
         setPlayer(player => ({...player, name}));
@@ -92,7 +93,7 @@ const GameState =({ children }) => {
                 calculateScore,
                 resetBoard,
                 resetGame,
-                nextRound
+                startRematch
             }}
         >
             {children}

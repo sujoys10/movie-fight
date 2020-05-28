@@ -8,7 +8,7 @@ import ErrorBoundary from './ErrorBoundary';
 
 export default function ScoreCard({closeModal, resetRound}){
     const Router = useRouter();
-    const { player, opponent, calculateScore ,resetGame } = useContext(GameContext);
+    const { player, opponent, calculateScore , startRematch } = useContext(GameContext);
     const { socket } = useContext(SocketContext);
     const [ rematch, setRematch ] = useState(false);
     const toastID = useRef('');
@@ -29,7 +29,7 @@ export default function ScoreCard({closeModal, resetRound}){
 
         console.log('accept Rematch');
         closeModal(false);
-        resetGame();
+        startRematch();
         resetRound(2);
 
     }
@@ -56,7 +56,7 @@ export default function ScoreCard({closeModal, resetRound}){
             });
             //setWaiting(false);
             closeModal(false);
-            resetGame();
+            startRematch();
             resetRound(2);
         })
 

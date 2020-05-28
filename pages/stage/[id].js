@@ -13,7 +13,7 @@ import Head from "next/head";
 export default function Stage(){
     const Router = useRouter();
     const { socket } = useContext(SocketContext);
-    const { player, opponent, nextRound, addOpponentName, resetGame } = useContext(GameContext);
+    const { player, opponent, resetBoard, addOpponentName, resetGame } = useContext(GameContext);
     const [ open, setOpen ] = useState(false);
     const [ round, setRound ] = useState(2)
 
@@ -29,7 +29,7 @@ export default function Stage(){
     }
 
     const startNextRound = () => {
-      nextRound();
+      resetBoard();
       toast.info('Next round 🦄');
     }
 
