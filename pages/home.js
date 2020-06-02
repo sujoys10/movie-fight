@@ -26,7 +26,7 @@ export default function Home({ onlineUsers }) {
             <title>Movie Fight</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <p className="fixed top-2 right-2">Online : {users}</p>
+          <p className="fixed top-.2 right-2">Online : {users}</p>
           <div className="py-1 my-2 flex w-full">
             <p 
               className="text-center w-half p-2" 
