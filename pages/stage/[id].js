@@ -15,7 +15,7 @@ export default function Stage(){
     const { socket } = useContext(SocketContext);
     const { player, opponent, resetBoard, addOpponentName, resetGame } = useContext(GameContext);
     const [ open, setOpen ] = useState(false);
-    const [ round, setRound ] = useState(2)
+    const [ round, setRound ] = useState(3)
 
 
     const handleRouteChange = (url) => {
@@ -30,7 +30,7 @@ export default function Stage(){
 
     const startNextRound = () => {
       resetBoard();
-      toast.info('Next round 🦄');
+      toast.info('Next round');
     }
 
     useEffect(() => {
@@ -43,13 +43,11 @@ export default function Stage(){
 
       //listen to new member joining
       socket && socket.on('newMember', name => {
-        console.log('newMember: ' ,`${name} joined`)
         toast.info(`${name} joined`);
         addOpponentName(name);
       })
 
       socket && socket.on('opponentLeft', (opponent) => {
-        console.log('opponent left');
         toast.error(`${opponent} left`)
         setRound(1);
         resetGame();
@@ -57,7 +55,6 @@ export default function Stage(){
       })
 
       socket && socket.on('ownerLeft', (owner) => {
-          console.log('owner left');
           toast.error(`${owner} left.`);
           Router.replace('/home');
       })
@@ -99,7 +96,7 @@ export default function Stage(){
                 <Opponent />
                 <Player />
             </div>
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black
+            <div className="absolute top-47 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black
                   rounded-full h-12 w-12 
             ">
               <p className="text-white text-xl font-medium  text-center my-15p">{round}</p>

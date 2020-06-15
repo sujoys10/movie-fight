@@ -23,20 +23,20 @@ export default function Home({ onlineUsers }) {
       <Layout>
         <div className="container">
           <Head>
-            <title>Movie Fight</title>
+            <title>Movie Battle</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <p className="fixed top-.2 right-2">Online : {users}</p>
           <div className="py-1 my-2 flex w-full">
             <p 
               className="text-center w-half p-2" 
-              style={tab === 'home' ? {color: '#1c8fe7'} : null}
+              style={tab === 'home' ? {background: 'rgba(126, 213, 111, 0.8)'} : null}
               onClick={() => setTab('home')}
             >Home</p>
             <p 
               className="text-center w-half p-2"
               onClick={() => setTab('rooms')}
-              style={tab === 'rooms' ? {color: '#1c8fe7'} : null}
+              style={tab === 'rooms' ? {background: 'rgba(126, 213, 111, 0.8)'} : null}
             >Rooms</p>
           </div>
           { tab === 'home' ? <RoomForm /> : <RoomList /> }
@@ -47,7 +47,7 @@ export default function Home({ onlineUsers }) {
 
 
 export async function getServerSideProps(){
-  const res = await fetch('https://movie-cricket.herokuapp.com/online');
+  const res = await fetch('https://movie-battle.herokuapp.com/online');
   const onlineUsers = await res.json();
   return { props: { onlineUsers } }
 }

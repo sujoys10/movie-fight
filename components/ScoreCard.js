@@ -27,7 +27,6 @@ export default function ScoreCard({closeModal, resetRound}){
         socket && socket.emit('rematchAccepted');
         toast.dismiss(toastID.current);
 
-        console.log('accept Rematch');
         closeModal(false);
         startRematch();
         resetRound(2);

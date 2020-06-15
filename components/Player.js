@@ -8,7 +8,7 @@ export default function Player(){
     const { player } = useContext(GameContext);
 
     return(
-        <div className="bg-gray-200 h-half ">
+        <div className="bg-gray-200 h-53">
             <div className="mx-2 flex justify-between">
                 <p className="text-sm uppercase tracking-wider">{player.name}</p>
                 <p>score: {player.score}</p>

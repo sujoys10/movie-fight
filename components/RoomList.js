@@ -13,7 +13,7 @@ export default function RoomList(){
     },[]);
 
     const fetchRooms = async () => {
-        const availableRooms = await axios.get('https://movie-cricket.herokuapp.com/roomlist');
+        const availableRooms = await axios.get('https://movie-battle.herokuapp.com/roomlist');
         setRoomsList(availableRooms.data);
     }
 

@@ -32,7 +32,7 @@ export default function Opponent(){
 
     return(
         <ErrorBoundary>
-            <div className="h-half ">
+            <div className="h-47">
                 <div className="mx-2 flex justify-between">
                     <p className="text-sm uppercase tracking-wider" >{opponent.name? opponent.name : 'waiting...'}</p>
                     <p>score: {opponent.score}</p>

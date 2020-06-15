@@ -32,7 +32,7 @@ export default function RoomForm(){
                     value={room} 
                     handleChange={handleRoomChange}
                 />
-                <Button name={"Submit"}/>
+                <Button name={"Go Go"}/>
             </form>
         </div>
     )
