@@ -78,7 +78,7 @@ export default function Stage(){
         const currentRound = round - 1;
         setRound(currentRound);
         if(currentRound === 0){
-          setOpen(true)
+          setTimeout(() => setOpen(true), 1500)
         }else{
           setTimeout(startNextRound, 3000);
         }
