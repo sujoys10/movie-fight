@@ -23,7 +23,7 @@ export default function Stage(){
     }
 
     const resetStage = () => {
-      setRound(2);
+      setRound(3);
       resetGame();
       setOpen(false)
     }

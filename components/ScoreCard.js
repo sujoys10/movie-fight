@@ -29,7 +29,7 @@ export default function ScoreCard({closeModal, resetRound}){
 
         closeModal(false);
         startRematch();
-        resetRound(2);
+        resetRound(3);
 
     }
 
