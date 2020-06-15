@@ -69,9 +69,9 @@ const GameState =({ children }) => {
 
     const calculateScore = () => {
         if(player.score > opponent.score){
-           return player.name;
+           return `${player.name} won`;
         }else if(player.score < opponent.score){
-           return opponent.name;
+           return `${opponent.name} won`;
         }else{
            return "DRAW";
         }
