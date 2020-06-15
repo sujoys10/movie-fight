@@ -80,7 +80,7 @@ export default function Stage(){
         if(currentRound === 0){
           setOpen(true)
         }else{
-          setTimeout(startNextRound, 3500);
+          setTimeout(startNextRound, 3000);
         }
       }
     }, [player.movie, opponent.movie])

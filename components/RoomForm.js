@@ -21,7 +21,7 @@ export default function RoomForm(){
         Router.push('/stage/[id]', `/stage/${room}`)
     }
     return(
-        <div className="bg-theme fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+        <div className="bg-theme fixed top-1/2 sm:top-60 left-1/2 transform -translate-x-1/2 -translate-y-1/2
         h-32 w-64 flex items-center justify-center rounded">
             <form className="flex flex-col items-center" onSubmit={handleSubmit}>
                 <Input 
