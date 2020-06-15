@@ -36,7 +36,7 @@ const MovieBox = React.memo(function({ id, player }){
                         <img className="h-full w-full shadow rounded" src={movieDetails.Poster} alt={movieDetails.imdbRating} />
                     </div>
                     <p className="text-xs font-medium mt-px">IMDB: {movieDetails.imdbRating}</p>
-                    <p className="text-sm lg:text-base">{movieDetails.Title}</p>
+                    <p className="text-sm lg:text-base max-w-md">{movieDetails.Title}</p>
                 </div>
             ): null}
         </Fragment>
